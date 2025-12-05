@@ -15,32 +15,32 @@ export default function SearchResult() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
 
-  const itemsPerPage = 30; // 5개 x 6줄
+  const itemsPerPage = 20; // 4개 x 5줄
 
   // 같은 동물 그룹화 함수
   const groupAnimals = (animalList) => {
     const grouped = {};
-
-    animalList.forEach((animal) => {
+    
+    animalList.forEach(animal => {
       const key = animal.desertionNo || animal.noticeNo;
       if (!grouped[key]) {
         grouped[key] = {
           ...animal,
-          images: [],
+          images: []
         };
       }
-
+      
       // 이미지 추가
       if (animal.popfile1) grouped[key].images.push(animal.popfile1);
       if (animal.popfile2) grouped[key].images.push(animal.popfile2);
       if (animal.popfile) grouped[key].images.push(animal.popfile);
     });
-
+    
     // 중복 이미지 제거
-    Object.keys(grouped).forEach((key) => {
+    Object.keys(grouped).forEach(key => {
       grouped[key].images = [...new Set(grouped[key].images)];
     });
-
+    
     return Object.values(grouped);
   };
 
@@ -67,7 +67,7 @@ export default function SearchResult() {
 
   const goToPage = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // 페이지 번호 범위 계산 (현재 페이지 기준 앞뒤 2개씩)
@@ -90,9 +90,7 @@ export default function SearchResult() {
           <div className="result-header">
             <h2>검색 결과</h2>
             {!loading && !error && (
-              <p className="result-count">
-                총 {animals.length}마리의 아이들을 찾았습니다.
-              </p>
+              <p className="result-count">총 {animals.length}개의 동물을 찾았습니다.</p>
             )}
           </div>
 
@@ -128,9 +126,9 @@ export default function SearchResult() {
 
           <div className="grid">
             {animals.map((a) => (
-              <AnimalCard
-                key={a.desertionNo}
-                data={a}
+              <AnimalCard 
+                key={a.desertionNo} 
+                data={a} 
                 onClick={setSelectedAnimal}
                 imageCount={a.images.length}
               />
@@ -147,7 +145,7 @@ export default function SearchResult() {
               >
                 &laquo; 처음
               </button>
-
+              
               <button
                 className="page-btn"
                 onClick={() => goToPage(currentPage - 1)}
@@ -159,7 +157,7 @@ export default function SearchResult() {
               {getPageNumbers().map((page) => (
                 <button
                   key={page}
-                  className={`page-btn ${currentPage === page ? "active" : ""}`}
+                  className={`page-btn ${currentPage === page ? 'active' : ''}`}
                   onClick={() => goToPage(page)}
                 >
                   {page}
@@ -187,12 +185,12 @@ export default function SearchResult() {
       </main>
 
       {selectedAnimal && (
-        <AnimalDetail
-          animal={selectedAnimal}
+        <AnimalDetail 
+          animal={selectedAnimal} 
           onClose={() => setSelectedAnimal(null)}
         />
       )}
-
+      
       <Footer />
     </div>
   );
