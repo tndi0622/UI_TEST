@@ -1,18 +1,13 @@
 import React from "react";
 
-export default function AnimalCard({ data, onClick, imageCount = 1 }) {
+export default function AnimalCard({ data, onClick }) {
   // ✅ 첫 번째 이미지 사용
-  const imageUrl =
-    data.images && data.images.length > 0
-      ? data.images[0]
-      : data.popfile1 || data.popfile2 || data.popfile;
+  const imageUrl = data.images && data.images.length > 0 
+    ? data.images[0] 
+    : data.popfile1 || data.popfile2 || data.popfile;
 
   return (
-    <article
-      className="animal-card"
-      onClick={() => onClick(data)}
-      style={{ cursor: "pointer" }}
-    >
+    <article className="animal-card" onClick={() => onClick(data)} style={{ cursor: 'pointer' }}>
       <div className="card-image-wrapper">
         <img
           src={imageUrl || "https://via.placeholder.com/400x300?text=No+Image"}
@@ -22,9 +17,6 @@ export default function AnimalCard({ data, onClick, imageCount = 1 }) {
             e.target.src = "https://via.placeholder.com/400x300?text=No+Image";
           }}
         />
-        {imageCount > 1 && (
-          <div className="image-count-badge"> {imageCount}</div>
-        )}
       </div>
       <div className="card-body">
         <h4>{data.kindFullNm || data.kindCd}</h4>
@@ -41,7 +33,7 @@ export default function AnimalCard({ data, onClick, imageCount = 1 }) {
         </p>
         <p>색상: {data.colorCd || "정보 없음"}</p>
         <p>보호소: {data.careNm || "정보 없음"}</p>
-        <p className="detail-link"> 클릭하여 상세정보 보기</p>
+        <p className="detail-link">🔍 클릭하여 상세정보 보기</p>
       </div>
     </article>
   );
