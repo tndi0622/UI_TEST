@@ -90,7 +90,7 @@ export default function SearchResult() {
           <div className="result-header">
             <h2>검색 결과</h2>
             {!loading && !error && (
-              <p className="result-count">총 {animals.length}개의 동물을 찾았습니다.</p>
+              <p className="result-count">총 {animals.length}마리의 아이들을 찾았습니다.</p>
             )}
           </div>
 
